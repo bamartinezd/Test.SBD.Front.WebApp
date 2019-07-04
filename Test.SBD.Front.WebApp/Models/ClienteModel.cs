@@ -1,7 +1,6 @@
 namespace Test.SBD.Front.WebApp.Models
 {
     using System;
-    using System.Collections.Generic;
 
     public partial class ClienteModel
     {

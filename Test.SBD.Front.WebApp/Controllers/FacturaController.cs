@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Net.Http;
-using Test.SBD.Front.WebApp.Models;
+﻿using Newtonsoft.Json;
 using RestSharp;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Net;
-using Newtonsoft.Json;
-using RestSharp.Serialization.Json;
+using System.Web.Mvc;
+using Test.SBD.Front.WebApp.Models;
 
 namespace Test.SBD.Front.WebApp.Controllers
 {
@@ -26,7 +22,7 @@ namespace Test.SBD.Front.WebApp.Controllers
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var resp = response.Content;
-                resp=resp.Trim("\"".ToCharArray());
+                resp = resp.Trim("\"".ToCharArray());
                 resp = resp.Replace("\\", "");
                 facturas = new List<FacturaModel>(JsonConvert.DeserializeObject<List<FacturaModel>>(resp));
             }
@@ -37,7 +33,7 @@ namespace Test.SBD.Front.WebApp.Controllers
         public ActionResult Details(int id)
         {
             FacturaModel factura = null;
-            RestClient restClient = new RestClient(ConfigurationManager.AppSettings["URLBackend"] + "api/Factura/" +id);
+            RestClient restClient = new RestClient(ConfigurationManager.AppSettings["URLBackend"] + "api/Factura/" + id);
             RestRequest request = new RestRequest(Method.GET);
             request.AddHeader("Content-Type", "application/json");
             var response = restClient.Execute(request);
